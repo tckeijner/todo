@@ -1,0 +1,54 @@
+<p>
+  <button mat-raised-button [routerLink]="['/lists']">Back</button>
+  <mat-card>
+    <form
+      *ngIf="itemsForm"
+      [formGroup]="itemsForm"
+      (ngSubmit)="onSubmit(itemsForm.value)"
+    >
+      <mat-form-field>
+        <mat-label></mat-label>
+        <input
+          matInput
+          formControlName="listTitle"
+          placeholder="List name"
+          (keyup.enter)="onListNameUpdate($event)"
+        />
+      </mat-form-field>
+      <mat-list role="list">
+        <div formArrayName="items">
+          <div
+            [formGroupName]="i"
+            *ngFor="let item of items.controls.sort(); let i = index"
+          >
+            <mat-checkbox formControlName="completed" >
+              <mat-form-field appearance="standard">
+                <mat-label
+                  >Created on: {{ item.value["dateGenerated"] }}</mat-label
+                >
+                <input
+                  matInput
+                  formControlName="title"
+                  placeholder="Type here..."
+                />
+              </mat-form-field>
+            </mat-checkbox>
+          </div>
+        </div>
+        <mat-checkbox>
+          <mat-form-field formGroupName="newItem" appearance="standard">
+            <mat-label>New item</mat-label>
+            <input
+              matInput
+              formControlName="title"
+              placeholder="Type here..."
+              (keyup.enter)="onAddNew($event)"
+            />
+          </mat-form-field>
+        </mat-checkbox>
+      </mat-list>
+    </form>
+  </mat-card>
+</p>
+
+<div></div>

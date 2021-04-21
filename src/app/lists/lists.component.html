@@ -1,0 +1,5 @@
+<mat-nav-list>
+  <mat-list-item *ngFor="let list of lists" [routerLink]="['/lists', list.id]">
+    {{list.listTitle}}
+  </mat-list-item>
+</mat-nav-list>
